@@ -21,7 +21,7 @@
 						<image src="/static/logo.png" mode=""></image>
 						<view>
 							<view>第{{index2+1}}个商品标题</view>
-							<!-- <view class="describe">第{{index2+1}}个商品的描述内容</view> -->
+							<view class="describe">第{{index2+1}}个商品的描述内容</view>
 							<view class="money">第{{index2+1}}个商品的价格</view>
 						</view>
 					</view>

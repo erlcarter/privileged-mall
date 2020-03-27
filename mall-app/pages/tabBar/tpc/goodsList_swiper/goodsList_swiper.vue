@@ -12,21 +12,27 @@
             </scroll-view>
 		</view>
 		<view class="main">
-			<scroll-view  scroll-y="true" :style="{ 'height':scrollHeight }" @scroll="mainScroll" :scroll-into-view="scrollInto" scroll-with-animation="true">
-				<view class="item" v-for="(item,index) in mainArray" :key="index" :id="'item-'+index">
-					<view class="title">
-						<view>{{item.title}}</view>
-					</view>
-					<view class="goods" v-for="(item2,index2) in item.list" :key="index2">
-						<image src="/static/logo.png" mode=""></image>
-						<view>
-							<view>第{{index2+1}}个商品标题</view>
-							<!-- <view class="describe">第{{index2+1}}个商品的描述内容</view> -->
-							<view class="money">第{{index2+1}}个商品的价格</view>
+			<swiper class="swiper" :style="{ 'height':scrollHeight }" 
+				:current="leftIndex" @change="swiperChange"
+				 vertical="true" duration="300">
+				<swiper-item v-for="(item,index) in mainArray" :key="index">
+					<scroll-view  scroll-y="true" :style="{ 'height':scrollHeight }">
+						<view class="item">
+							<view class="title">
+								<view>{{item.title}}</view>
+							</view>
+							<view class="goods" v-for="(item2,index2) in item.list" :key="index2">
+								<image src="/static/logo.png" mode=""></image>
+								<view>
+									<view>第{{index2+1}}个商品标题</view>
+									<view class="describe">第{{index2+1}}个商品的描述内容</view>
+									<view class="money">第{{index2+1}}个商品的价格</view>
+								</view>
+							</view>
 						</view>
-					</view>
-				</view>
-			</scroll-view>
+					</scroll-view>
+				</swiper-item>
+			</swiper>
 		</view>
 	</view>
 </template>
@@ -38,15 +44,13 @@
 				scrollHeight:'500px',
 				leftArray:[],
 				mainArray:[],
-				topArr:[],
-				leftIndex:0,
-				scrollInto:''
+				leftIndex:0
 			}
 		},
 		onLoad(){
+			/* 设置当前滚动容器的高，若非窗口的高度，请自行修改 */
 			uni.getSystemInfo({
 				success:(res)=>{
-					/* 设置当前滚动容器的高，若非窗口的高度，请自行修改 */
 					this.scrollHeight=`${res.windowHeight}px`;
 				}
 			});
@@ -62,13 +66,15 @@
 					/* 因无真实数据，当前方法模拟数据。正式项目中将此处替换为 数据请求即可 */
 					uni.showLoading();
 					setTimeout(()=>{
+						/* 因无真实数据，当前方法模拟数据 */
 						let [left,main]=[[],[]];
 						
 						for(let i=0;i<10;i++){
 							left.push(`${i+1}类商品`);
 							
 							let list=[];
-							for(let j=0;j<(i+1);j++){
+							let max = Math.floor(Math.random()*15) || 8;
+							for(let j=0;j<max;j++){
 								list.push(j);
 							}
 							main.push({
@@ -87,56 +93,17 @@
 					uni.hideLoading();
 					this.leftArray=res.left;
 					this.mainArray=res.main;
-					
-					// DOM 挂载后 再调用 getElementTop 获取高度的方法。
-					this.$nextTick(()=>{
-						this.getElementTop();
-					});
 				});
-			},
-			/* 获取元素顶部信息 */
-			getElementTop(){
-				/* Promise 对象数组 */
-				let p_arr=[];
-				
-				/* 新建 Promise 方法 */
-				let new_p=(selector)=>{
-					return new Promise((resolve,reject)=>{
-						let view = uni.createSelectorQuery().select(selector);
-						view.boundingClientRect(data => {
-							resolve(data.top);
-						}).exec();
-					})
-				}
-				
-				/* 遍历数据，创建相应的 Promise 数组数据 */
-				this.mainArray.forEach((item,index)=>{
-					p_arr.push(new_p(`#item-${index}`));
-				});
-				
-				/* 所有节点信息返回后调用该方法 */
-				Promise.all(p_arr).then((data)=>{
-					this.topArr=data;					
-				});
-			},
-			/* 主区域滚动监听 */
-			mainScroll(e){
-				let top =e.detail.scrollTop;
-				let index=0;
-				/* 查找当前滚动距离 */
-				for(let i = (this.topArr.length-1);i>=0;i--){
-					/* 在部分安卓设备上，因手机逻辑分辨率与rpx单位计算不是整数，滚动距离与有误差，增加2px来完善该问题 */
-					if((top+2)>=this.topArr[i]){
-						index = i;
-						break;
-					}
-				}
-				this.leftIndex=(index < 0 ? 0: index);
 			},
 			/* 左侧导航点击 */
 			leftTap(e){
 				let index=e.currentTarget.dataset.index;
-				this.scrollInto=`item-${index}`;
+				this.leftIndex=Number(index);
+			},
+			/* 轮播图切换 */
+			swiperChange(e){
+				let index=e.detail.current;
+				this.leftIndex=Number(index);
 			}
 		}
 	}
@@ -178,7 +145,7 @@
 				}
 			}
 			
-			&.active{
+			&.active,&:active{
 				color: #42b983;
 				background-color: #fff;
 			}
@@ -191,8 +158,10 @@
 		flex-grow: 1;
 		box-sizing: border-box;
 		
-		
-		
+		.swiper{
+			height: 500px;
+		}
+
 		.title{
 			line-height: 64rpx;
 			font-size: 24rpx;
@@ -201,12 +170,11 @@
 			background-color: #fff;
 			position: sticky;
 			top: 0;
-			z-index: 19;
+			z-index: 999;
 		}
 		
 		.item{
 			padding-bottom: 10rpx;
-			border-bottom: #eee solid 1px;
 		}
 		
 		.goods{

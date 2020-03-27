@@ -165,6 +165,6 @@
 	}
 	.mov-text-size{
 		text-align: center;
-		font-size: 22rpx;
+		font-size: 20rpx;
 	}
 </style>
