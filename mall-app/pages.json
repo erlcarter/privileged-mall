@@ -1,34 +1,24 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/tabBar/components/index/index",
-			"style": {
-				"navigationBarTitleText": "主页"	
-			}
+			"path": "pages/tabBar/index/index",
+			"style": {}
 		},
 		{
-			"path": "pages/tabBar/components/shop/shop",
-			"style": {
-				"navigationBarTitleText": "商城"			
-			}
+			"path": "pages/tabBar/shop/shop",
+			"style": {}
 		},
 		{
-			"path": "pages/tabBar/components/privilege/privilege",
-			"style": {
-				"navigationBarTitleText": "特权"				
-			}
+			"path": "pages/tabBar/privilege/privilege",
+			"style": {}
 		},
 		{
-			"path": "pages/tabBar/components/member/member",
-			"style": {
-				"navigationBarTitleText": "会员"			
-			}
+			"path": "pages/tabBar/member/member",
+			"style": {}
 		},
 		{
-			"path": "pages/tabBar/components/user/user",
-			"style": {
-				"navigationBarTitleText": "我的"	
-			}
+			"path": "pages/tabBar/user/user",
+			"style": {}
 		}
         ,{
             "path" : "pages/tabBar/tpc/goodsList_swiper/goodsList_swiper",
@@ -38,6 +28,62 @@
 		    "path" : "pages/tabBar/tpc/goodsList_swiper/goodsList_scroll",
 		    "style" : {}
 		}
+        
+        ,{
+            "path" : "pages/moive/allmoive/allmoive",
+            "style" : {
+				"navigationBarTitleText": "全部电影"	
+			}
+        }
+        ,{
+            "path" : "pages/moive/exclusiveplanning/exclusiveplanning",
+            "style" : {
+				"navigationBarTitleText": "独家策划"	
+			}
+        }
+        ,{
+            "path" : "pages/moive/findmoive/findmoive",
+            "style" : {
+				"navigationBarTitleText": "找电影"	
+			}
+        }
+        ,{
+            "path" : "pages/moive/highscoremoive/highscoremoive",
+            "style" : {
+				"navigationBarTitleText": "高分电影"	
+			}
+        }
+        ,{
+            "path" : "pages/moive/themesheet/themesheet",
+            "style" : {
+				"navigationBarTitleText": "主题片单"	
+			}
+        }
+        ,{
+            "path" : "pages/moive/moivecalandar/moivecalandar",
+            "style" : {
+				"navigationBarTitleText": "看片日历"
+			}
+        }
+        ,{
+            "path" : "pages/moive/moiverank/moiverank",
+            "style" : {
+				"navigationBarTitleText": "电影榜"
+			}
+        }
+        ,{
+            "path" : "pages/moive/moviecontiuneplay/moviecontiuneplay",
+            "style" : {
+				"navigationBarTitleText": "继续观看"
+			}
+        }
+      
+        ,{
+            "path" : "pages/shop/productdetailspage/productdetailspage",
+            "style" : {
+				"navigationBarTitleText": "商品详情页"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",//导航栏标题颜色及状态栏前景颜色，仅支持 black/white
@@ -49,29 +95,29 @@
 		"color":"#7A7E83",
 		"selectedColor":"#1296db",
 		"backgroundColor":"#F8F8F8",
-		"borderStyle":"#F8F8F8",
+		"borderStyle":"black",
 		"list": [{
-			"pagePath":"pages/tabBar/components/index/index", //页面路径，必须在 pages 中先定义
+			"pagePath":"pages/tabBar/index/index", //页面路径，必须在 pages 中先定义
 			"iconPath":"static/host.png", //图片路径，icon 大小限制为40kb，建议尺寸为 81px * 81px，当 postion 为 top 时，此参数无效，不支持网络图片，不支持字体图标
 			"selectedIconPath":"static/hostHL.png", //选中时的图片路径，icon 大小限制为40kb，建议尺寸为 81px * 81px ，当 postion 为 top 时，此参数无效
 			"text":"主页" //tab 上按钮文字，在 App 和 H5 平台为非必填。例如中间可放一个没有文字的+号图标
 			},{
-				"pagePath":"pages/tabBar/components/shop/shop",
+				"pagePath":"pages/tabBar/shop/shop",
 				"iconPath":"static/shop.png",
 				"selectedIconPath":"static/shopHL.png",
 				"text":"商城"
 			},{
-				"pagePath":"pages/tabBar/components/privilege/privilege",
+				"pagePath":"pages/tabBar/privilege/privilege",
 				"iconPath":"static/privilege.png",
 				"selectedIconPath":"static/privilegeHL.png",
 				"text":"特权"
 			},{
-				"pagePath":"pages/tabBar/components/member/member",
+				"pagePath":"pages/tabBar/member/member",
 				"iconPath":"static/member.png",
 				"selectedIconPath":"static/memberHL.png",
 				"text":"会员"
 			},{
-				"pagePath":"pages/tabBar/components/user/user",
+				"pagePath":"pages/tabBar/user/user",
 				"iconPath":"static/user.png",
 				"selectedIconPath":"static/userHL.png",
 				"text":"我的"
