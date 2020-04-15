@@ -1,0 +1,29 @@
+{
+  "name": "hm-uniapp-row-video-card",
+  "version": "0.0.1",
+  "description": "毫末uni-app视频行卡片组件。支持H5/小程序(微信、支付宝、头条、百度、QQ)/App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haomo-studio/hm-uniapp-row-video-card.git"
+  },
+  "keywords": [
+    "毫末",
+    "uni-app",
+    "H5",
+    "小程序",
+    "App",
+    "Android",
+    "iOS",
+    "新闻"
+  ],
+  "author": "\"毫末科技\"",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haomo-studio/hm-uniapp-row-video-card/issues"
+  },
+  "homepage": "https://github.com/haomo-studio/hm-uniapp-row-video-card#readme"
+}

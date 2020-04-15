@@ -84,6 +84,22 @@
 				"navigationBarTitleText": "商品详情页"
 			}
         }
+        /* ,{
+            "path" : "pages/login/login",
+            "style" : {}
+        }
+		,{
+			"path" : "pages/login/registe",
+			"style" : {}
+		} */
+        ,{
+            "path" : "pages/moive/detail/detail",
+            "style" : {}
+        },
+		{
+			"path" : "pages/moive/Splayer/Splayer",
+			"style" : {}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",//导航栏标题颜色及状态栏前景颜色，仅支持 black/white

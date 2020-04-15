@@ -1,7 +1,7 @@
 <template>
 	<view>
 		
-		<view class="uni-padding-wrap uni-common-mt" style="margin-bottom: 10rpx;">
+		<view class="uni-padding-wrap uni-common-mt" style="margin-bottom: 10rpx;margin-left: 20px;">
 			<!-- 搜索 -->
 			<view class="uni-flex uni-column">
 				<view class="uni-flex-item flex-item-V">
@@ -14,7 +14,7 @@
 				<view class="uni-flex-item flex-item-V">
 					<view class="uni-flex uni-row">
 						<view class="flex-item item-size" v-for="(item,i) in shopbannerFirst":key="i">
-							<view class="uni-column">						
+							<view class="uni-column img-div">						
 								<image class="shop-item-size  item-img" :src="item.img" @tap="openinfo(item.url)"></image>					
 							</view>
 							<view>
@@ -26,7 +26,7 @@
 					</view>
 					<view class="uni-flex uni-row">
 						<view class="flex-item item-size" v-for="(item,j) in shopbannerSecond":key="j">
-							<view class="uni-column">						
+							<view class="uni-column img-div">						
 								<image class="shop-item-size  item-img" :src="item.img" @tap="openinfo(item.url)"></image>					
 							</view>
 							<view>
@@ -119,7 +119,7 @@
 			    var navurl = e;    
 			    uni.navigateTo({
 			        url: navurl,
-			         success: res => {},
+			        success: res => {},
 			        fail: () => {},
 			            complete: () => {}
 			        });
@@ -133,9 +133,10 @@
 
 <style>
 	.item-size{
-		width: 15%;
-		height: 100rpx;
-		padding: 20rpx;
+		width: 30%;
+	}
+	.img-div{
+		padding-left: 15px;
 	}
 	.shop-item-size{
 		width: 10%;

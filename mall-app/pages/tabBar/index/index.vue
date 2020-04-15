@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="uni-padding-wrap  uni-common-mt">		
+		<view class="uni-padding-wrap  uni-common-mt uni-body">		
 			<view class="uni-flex uni-column">			
 				<!-- banner 轮播图 -->
 				<view class="uni-flex-item flex-item-V">
@@ -8,7 +8,7 @@
 							<view class="page-section-spacing">
 								<swiper class="swiper" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" :circular="circular">
 									<swiper-item v-for="(item,i) in moviebannerfirst":key="i">
-										<view class="swiper-item">
+										<view class="swiper-item" @tap="playvideo">
 											<image class="bannersize" :src="item.url"></image>
 										</view>
 									</swiper-item>
@@ -20,7 +20,7 @@
 			</view>
 			<view class="uni-flex uni-column">	
 				<!-- movieserver 操作栏 -->
-				<view class="uni-flex-item flex-item-V">
+				<view class="uni-flex-item flex-item-V centerbannersize1">
 					<view id="v-for-banner" class="uni-flex uni-row row-size">
 					    <view :class="item.classname" v-for="(item,j) in moviebannersecond":key="j" @tap="openinfo(item.url)">
 							<image :src="item.img" class="mov-server-img">
@@ -32,8 +32,7 @@
 				<!-- movieserver 操作栏 -->
 			</view>
 			<view class="uni-flex uni-column">	
-				<!-- submovie 电影主题 -->
-				<view class="uni-flex-item flex-item-V">
+				<view class="uni-flex-item centerbannersize2">
 					<view class="uni-flex uni-row row-size">
 						<view class="flex-item sub-itemleft-size" v-for="(item,k) in moviebannerthrid":key="k">
 							<view class="uni-column" @tap="openinfo(item.url)">
@@ -42,22 +41,58 @@
 								</view>
 							</view>	
 							<view class="uni-column">
-								<view class="flex-item">
-									<span class="mov-text-size">{{item.name}}</span>
+								<view class="flex-item mov-text-size">
+									<span>{{item.name}}</span>
 								</view>
 							</view>
 						</view>
 					</view>
 				</view>
-				<!-- submovie 电影主题 -->
 			</view>
 		</view>
 		<hr class="hr-style"/>
+		<view class="uni-flex uni-column">
+			<view class="flex-item">今日推荐</view>
+		</view>
+		<!-- 推荐电影 -->
+		<view class="uni-flex uni-column">
+			<view class="flex-item">
+				<uni-card>
+					<view class="uni-column column-size">
+						<view class="flex-item">
+							<image class="moive-cover" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2848803552,3617688781&fm=26&gp=0.jpg"></image>
+						</view>
+					</view>
+					<view class="uni-column column-size">
+						<view class="flex-item">
+							<view class="uni-row">
+								<view class="flex-item row-thumbnail-size">
+									<image class="moive-thumbnail" src="#" style="height: 50px;" ></image>
+								</view>
+								<view class="flex-item row-text-size">
+									<view class="uni-column">大黄蜂</view>
+									<view class="uni-column">2019经典科幻片</view>
+								</view>
+								<view class="flex-item row-player-size">
+									<button>播放</button>
+								</view>
+							</view>
+						</view>
+					</view>
+				</uni-card>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>	
+	import HmRowVideoCard from '@/components/hm-row-video-card/index.vue'
+	import uniCard from '@/components/uni-card/uni-card.vue'
+
 	export default {
+		components:{
+			uniCard
+		},
 		data() {
 			return {
 				indicatorDots:true,
@@ -129,7 +164,17 @@
 			        fail: () => {},
 			            complete: () => {}
 			        });
-			    }
+			    },
+				playvideo(e){
+				console.log(e)
+				var navurl = "../../moive/detail/detail";    
+				uni.navigateTo({
+				    url: navurl,
+				     success: res => {},
+				    fail: () => {},
+				        complete: () => {}
+				    });
+			}
 		}
 	}
 </script>
@@ -157,6 +202,10 @@
 	   width: 100% /* needed for Firefox */
 	}
 	
+	.uni-body{
+		margin-left: 20px;
+	}
+
 	.swiper-item{height: 100%;}
 	.bannersize{width: 100%;height: 100%;}
 	.itemleft-size{
@@ -178,6 +227,14 @@
 		margin-top: 3%;
 		margin-bottom: 3%;
 	}
+	.centerbannersize1{
+		padding-left: 2%;
+		padding-right: 2%;
+	}
+	.centerbannersize2{
+		padding-left: 5%;
+		padding-right: 5%;
+	}
 	.mov-server-img{
 		width: 56rpx;
 		height: 56rpx;
@@ -191,13 +248,16 @@
 		margin-top: 20rpx;
 		margin-bottom: 20rpx;
 		line-height: 56rpx;
+		text-align: center;
 		display: inline-block;
 		
 	}
 	.sub-itemleft-size{
 		width: 15%;
 		height: 150rpx;
-		margin-left: 3%;
+		margin-left: 13rpx;
+		margin-right: 13rpx;
+		
 	}
 	.sub-item-size{
 		width: 15%;
@@ -215,15 +275,34 @@
 		height: 150rpx;
 	}
 	.item-img{
+		padding-top: 4rpx;
+		padding-bottom: 4rpx;
+		padding-left: 8rpx;
+		padding-right: 8rpx;
 		justify-content:space-between;
 	}
 	.mov-img-size{
-		width: 50rpx;
-		height: 50rpx;
-		
+		width: 60rpx;
+		height: 60rpx;
 	}
 	.mov-text-size{
 		text-align: center;
 		font-size: 20rpx;
+	}
+	.column-size{
+		width: 100%;
+	}
+	.moive-cover{
+		width: 100%
+	}
+	.row-thumbnail-size{
+		width: 10%;
+		height: 50px;
+	}
+	.row-text-size{
+		width: 70%;
+	}
+	.row-player-size{
+		width: 20%;
 	}
 </style>

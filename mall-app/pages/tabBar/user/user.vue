@@ -1,7 +1,7 @@
 <template>
 	<view class="center">
 		<view class="logo" @click="goLogin" :hover-class="!login ? 'logo-hover' : ''">
-			<image class="logo-img" :src="login ? userInfo.avatarUrl :avatarUrl"></image>
+			<image class="logo-img" :src="login ? userInfo.avatarUrl :avatarUrl" @tap="goLogin()"></image>
 			<view class="logo-title">
 				<text class="uer-name">Hi，{{login ? uerInfo.name : '您未登录'}}</text>
 				<text class="go-login navigat-arrow" v-if="!login">&#xe65e;</text>
@@ -50,13 +50,23 @@
 			return {
 				login: false,
 				avatarUrl: "../../static/uni-center/logo.png",
-				userInfo: {}
+				userInfo: {
+					forcedLogin:false,//是否需要强制登陆
+					username:"",
+					token:""
+				}
 			}
 		},
 		methods: {
 			goLogin() {
 				if (!this.login) {
 					console.log("点击前往登录")
+					uni.navigateTo({
+						url: navurl,
+						success: res => {},
+						fail: () => {},
+						complete: () => {}
+					})
 				}
 			}
 		}
